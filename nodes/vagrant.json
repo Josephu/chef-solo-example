@@ -1,0 +1,22 @@
+{
+  "run_list": [
+      "recipe[nginx::source]",
+      "recipe[mysql::server]"
+    ],
+
+  "mysql": {
+    :server_root_password => 'rootpass'
+  },
+
+  "nginx": {
+      "source": {
+            "version": "1.2.8",
+            "prefix": "/usr/local/nginx"
+          },
+      "dir": "/usr/local/nginx/conf",
+      "log_dir": "/usr/local/nginx/log",
+      "binary": "/usr/local/nginx/sbin/nginx",
+      "user": "www-data",
+      "init_style": "init"
+    }
+}
