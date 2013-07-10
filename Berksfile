@@ -6,6 +6,7 @@ cookbook 'ohai'
 cookbook 'apt'
 cookbook 'build-essential'
 cookbook 'sudo'
+cookbook 'git'
 
 # Ruby
 

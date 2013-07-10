@@ -78,6 +78,7 @@ Vagrant.configure("2") do |config|
     chef.json = {
       "run_list" => [
         "recipe[apt]",
+        "recipe[git]",
         "recipe[rvm::vagrant]",
         "recipe[rvm::system]",
         "recipe[nginx::source]",
@@ -87,15 +88,12 @@ Vagrant.configure("2") do |config|
         :default_ruby => "ruby-1.9.3-p429"
       },
       "nginx" => {
+          "default_site_enabled" => true,
+          "version" => "1.4.0",
           "source" => {
-             "version" => "1.4.0",
-             "prefix" => "/usr/local/nginx"
+             "prefix" => "/usr/local/nginx",
+             "modules" =>["http_gzip_static_module", "http_ssl_module"]
            },
-          "dir" => "/usr/local/nginx/conf",
-          "log_dir" => "/usr/local/nginx/log",
-          "binary"=> "/usr/local/nginx/sbin/nginx",
-          "user"=> "www-data",
-          "init_style"=> "init"
         },
         "mysql" => {
           "server_root_password" => "1234qwer",
@@ -104,8 +102,5 @@ Vagrant.configure("2") do |config|
         }
     }
 
-    #chef.run_list = [
-    #    "recipe[chef-solo-final::default]"
-    #]
   end
 end
