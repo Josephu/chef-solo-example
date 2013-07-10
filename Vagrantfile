@@ -60,7 +60,7 @@ Vagrant.configure("2") do |config|
 
   # Enabling the Berkshelf plugin. To enable this globally, add this configuration
   # option to your ~/.vagrant.d/Vagrantfile file
-  config.berkshelf.enabled = true
+  config.berkshelf.enabled = false
 
   # An array of symbols representing groups of cookbook described in the Vagrantfile
   # to exclusively install and copy to Vagrant's shelf.
@@ -74,6 +74,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :inline => "gem install chef --version 11.4.2 --no-rdoc --no-ri"
 
   config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = ["site-cookbooks", "cookbooks"]
 
     chef.json = {
       "run_list" => [
