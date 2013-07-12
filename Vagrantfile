@@ -83,24 +83,32 @@ Vagrant.configure("2") do |config|
         "recipe[rvm::vagrant]",
         "recipe[rvm::system]",
         "recipe[nginx::source]",
-        "recipe[mysql::server]"
+        "recipe[mysql::server]",
+        "recipe[tatoo]" # a customize cookbook
       ],
       "rvm" =>{
         :default_ruby => "ruby-1.9.3-p429"
       },
       "nginx" => {
-          "default_site_enabled" => true,
-          "version" => "1.4.0",
-          "source" => {
-             "prefix" => "/usr/local/nginx",
-             "modules" =>["http_gzip_static_module", "http_ssl_module"]
-           },
-        },
-        "mysql" => {
-          "server_root_password" => "1234qwer",
-          "server_repl_password" => "1234qwer",
-          "server_debian_password" => "1234qwer"
-        }
+        "default_site_enabled" => true,
+        "version" => "1.4.0",
+        "source" => {
+           "prefix" => "/usr/local/nginx",
+           "modules" =>["http_gzip_static_module", "http_ssl_module"]
+         },
+      },
+      "mysql" => {
+        "server_root_password" => "1234qwer",
+        "server_repl_password" => "1234qwer",
+        "server_debian_password" => "1234qwer"
+      },
+      "app" => {
+        "name" => "tatoo",
+        "web_dir" => "/home/vagrant/www/apps/tatoo"
+      },
+      "user" => {
+        "name" => "vagrant"
+      }
     }
 
   end
